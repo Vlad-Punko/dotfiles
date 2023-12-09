@@ -6,6 +6,9 @@ fi
 source "${HOME}/.config/bash/aliases.bash"
 source "${HOME}/.config/bash/exports.bash"
 source "${HOME}/.config/bash/functions.bash"
+source "${HOME}/.config/bash/ssh_agent.bash"
+# ---
+ssh-add "${HOME}/.ssh/id_rsa" 2> /dev/null
 
 # Create a new meta storage of the executed commands.
 shopt -s checkhash
