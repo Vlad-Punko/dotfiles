@@ -1,0 +1,4 @@
+---
+required_user_services:
+  - services/emacs.service
+  - services/notebook.service

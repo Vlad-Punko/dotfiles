@@ -4,6 +4,20 @@
 echo "${HOME} sweet ${HOME}"
 ```
 
+## Macbook pre-installation
+
+```bash
+# Step -- 1.
+sudo softwareupdate --all --install
+
+# Step -- 2.
+xcode-select --install
+xcode-select --print-path
+
+# Step -- 3.
+/bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
 ## Installation
 
 ```bash

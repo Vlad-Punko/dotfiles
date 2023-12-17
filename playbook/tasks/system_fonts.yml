@@ -1,28 +1,26 @@
 ---
 - name: install the required system fonts
   block:
-    - name: create new private variables for this logical group of tasks
-      set_fact:
-        fonts_folder: /tmp/system-fonts
-
-        # Set the main path to the installation script of this fonts package on the current machine.
-        fonts_installation_script: /tmp/system-fonts/install.sh
+    - name: create a new temporary directory for the required fonts
+      tempfile:
+        state: directory
+      register: fonts_folder
 
     - name: fetch the pre-patched system fonts and save them on the current machine
       git:
         repo: https://github.com/powerline/fonts.git
         clone: true
         version: master # the preferred version of this package
-        dest: "{{ fonts_folder }}"
+        dest: "{{ fonts_folder.path }}"
 
     - name: install the required fonts on the current operating system
-      command: "{{ fonts_installation_script }}"
+      command: "{{ fonts_folder.path }}/install.sh"
   always:
     - name: delete the downloaded fonts package from the current machine
       file:
-        path: "{{ fonts_folder }}"
+        path: "{{ fonts_folder.path }}"
         state: absent
-  when: ansible_distribution | lower == "fedora"
+  when: ansible_distribution in ["Fedora", "MacOSX", "Ubuntu"]
   tags:
     - fonts
     - fonts-workstation

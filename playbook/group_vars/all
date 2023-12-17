@@ -160,11 +160,6 @@ required_user_services:
   - services/emacs.service
   - services/notebook.service
 
-required_user_scripts:
-  - scripts/emacswrapper
-  - scripts/gitmirror
-  - scripts/updatesystem
-
 dotfiles_list:
   - { src: dotfiles/dot_aliases.bash, dest: ~/.config/bash/aliases.bash }
   - { src: dotfiles/dot_bash_logout, dest: ~/.bash_logout }
@@ -191,3 +186,7 @@ dotfiles_list:
   - { src: dotfiles/dot_tmux.conf, dest: ~/.config/tmux/tmux.conf }
   - { src: dotfiles/dot_tmux_session, dest: ~/.config/tmuxp/main.yml }
   - { src: views/gnome_views.css, dest: ~/.config/gtk-3.0/gtk.css } # some tweaks for the main terminal emulator
+
+---
+user: pika
+group: staff
