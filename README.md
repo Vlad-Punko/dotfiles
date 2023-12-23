@@ -8,32 +8,29 @@ echo "${HOME} sweet ${HOME}"
 
 ```bash
 # Step -- 1.
-git clone --depth=1 --branch=master https://github.com/vladpunko/workstation.git
+sudo softwareupdate --all --install
 
 # Step -- 2.
-cd ./workstation/playbook
+xcode-select --install
+xcode-select --print-path
 
 # Step -- 3.
-python3 -m venv .venv && source ./.venv/bin/activate
+/bin/bash -c "$(curl -sSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Step -- 4.
-python3 -m pip install --requirement=requirements.txt
+git clone --depth=1 --branch=master https://github.com/vladpunko/workstation.git
 
 # Step -- 5.
+cd ./workstation/playbook
+
+# Step -- 6.
+python3 -m venv .venv && source ./.venv/bin/activate
+
+# Step -- 7.
+python3 -m pip install --requirement=requirements.txt
+
+# Step -- 8.
 ansible-playbook --ask-become-pass --inventory=hosts workstation.yml
-```
-
-## Firmware
-
-```bash
-# Step -- 1.
-sudo sh -c 'fwupdmgr refresh --force && fwupdmgr update --assume-yes'
-
-# Step -- 2.
-sudo dnf swap ffmpeg-free ffmpeg --allowerasing
-
-# Step -- 3.
-sudo dnf group install --with-optional Multimedia
 ```
 
 ## License

@@ -1,41 +1,39 @@
 ---
-- name: check if system daemon directory exists
-  stat:
-    path: /etc/systemd/system
-  register: system_daemon_directory
+- include_vars: vars/user_services.yml
 
 - name: install and start user's services
   block:
     - name: create new private variables for this logical group of tasks
       set_fact:
-        services_location: ~/.config/systemd/user
+        services_location: ~/Library/LaunchAgents
 
     - name: create a new directory to store user's own units on the current machine
       file:
         path: "{{ services_location }}"
         state: directory
         recurse: false
-        owner: "{{ ansible_env.USER }}"
-        group: "{{ ansible_env.USER }}"
+        owner: "{{ user }}"
+        group: "{{ group }}"
         mode: 0755
 
     - name: install the required services for this user on the current operating system
       copy:
         src: "{{ item }}"
         dest: "{{ services_location }}" # it is a path to put user's own units
-        owner: "{{ ansible_env.USER }}"
-        group: "{{ ansible_env.USER }}"
+        owner: "{{ user }}"
+        group: "{{ group }}"
         mode: 0644
+      loop_control:
+        label: "{{ item | basename }}"
       with_items: "{{ required_user_services }}"
 
     - name: start and enable all user's services on the current operating system
-      systemd:
-        name: "{{ item | basename }}" # get the current service name
-        enabled: true
-        scope: user
-        state: stopped
+      command: "/bin/launchctl load -w {{ services_location }}/{{ item | basename }} && /bin/launchctl start {{ item | basename }}"
+      changed_when: False # since no way to detect if it started or not
+      loop_control:
+        label: "{{ item | basename }}"
       with_items: "{{ required_user_services }}"
-  when: ansible_distribution | lower == "fedora" and system_daemon_directory.stat.exists
+  when: ansible_distribution == "MacOSX"
   tags:
     - services
     - services-workstation

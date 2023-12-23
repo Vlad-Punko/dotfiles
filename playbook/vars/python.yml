@@ -1,0 +1,27 @@
+---
+miniconda_version: 23.5.2-0
+
+# Set the preferred version of the main python interpreter on the current machine.
+# See information: https://repo.anaconda.com/miniconda
+miniconda_python_version: py311
+
+miniconda_installer_checksum: sha256:c8f436dbde130f171d39dd7b4fca669c223f130ba7789b83959adc1611a35644
+
+required_python_packages:
+  - auditwheel
+  - bandit
+  - black
+  - flake8
+  - isort
+  - jupyter
+  - jupyterlab
+  - mypy
+  - pre-commit
+  - psutil
+  - pylint
+  - sshuttle
+  - tmuxp
+  - tqdm
+  - twine
+  - virtualenv
+  - virtualenvwrapper

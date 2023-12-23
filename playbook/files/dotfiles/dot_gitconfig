@@ -78,7 +78,7 @@
   submoduleSummary = true
 
 [gpg]
-  program = gpg2
+  program = gpg
 
 [user]
   email = iam.vlad.punko@gmail.com

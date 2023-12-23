@@ -27,7 +27,7 @@ alias tm='tmux attach || tmux new-session'
 alias e='emacsclient --create-frame --socket-name="${HOME}/.emacs.d/server-socket/server" --suppress-output --tty --quiet'
 
 # Create a new working session of the preferred file manager on the current machine.
-alias mc='source /usr/libexec/mc/mc-wrapper.sh --color --nomouse --skin=modarin256'
+alias mc='mc --color --nomouse --skin=modarin256'
 
 # Create a new working session of the preferred process viewer on the current machine.
 alias htop='htop --no-mouse --delay=10 --sort-key=PERCENT_MEM'
@@ -59,13 +59,5 @@ alias pyclean='find "${PWD}" -name "*.py[cod]" -o -name "__pycache__" -exec rm -
 # See information: https://github.com/pyenv/pyenv/issues/1889
 alias pyenv='env -- CC=clang pyenv'
 
-# Copy the provided text data to the system clipboard.
-alias pbcopy='xclip -selection clipboard -in'
-
-# Paste the saved text data from the system clipboard on the current machine.
-alias pbpaste='xclip -selection clipboard -out'
-
 # Trim new lines and copy data to the system clipboard.
 alias copyline='tr --delete "\\n" | pbcopy'
-
-alias open='xdg-open'

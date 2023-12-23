@@ -4,25 +4,19 @@ export PYENV_ROOT="${HOME}/.pyenv"
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONIOENCODING=UTF-8
 
-export PATH="${PYENV_ROOT}/bin:${HOME}/.miniconda/bin:${HOME}/bin:${HOME}/.local/bin:/usr/local/bin:/usr/local/sbin${PATH:+:${PATH}}"
+export PATH="${PYENV_ROOT}/bin:${HOME}/.miniconda/bin:${HOME}/bin:${HOME}/.local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/local/sbin${PATH:+:${PATH}}"
 
 # Set the full path used to execute the current instance of the main interactive system.
 export SHELL=/bin/bash
 
 # Set the main path to store user's settings on the current machine.
-export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/Library/Preferences}"
 
 # Set the main path where user-specific cached data should be written on the current machine.
-export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-${HOME}/Library/Caches}"
 
 # Set the main path where user-specific data files should be written on the current machine.
-export XDG_DATA_HOME="${HOME}/.local/share"
-
-# Set the main path where user-specific state files should be written on the current machine.
-export XDG_STATE_HOME="${HOME}/.local/state"
-
-# Set the main path where user-specific non-essential runtime files should be written on the current machine.
-export XDG_RUNTIME_DIR="/run/user/${UID}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-${HOME}/Library}"
 
 # Set the main encoding for the current operating system.
 export LANG=en_US.UTF-8
@@ -66,3 +60,6 @@ GPG_TTY="$(tty)"; export GPG_TTY
 
 # Set the standard arguments for the preferred command-line fuzzy finder on the current machine.
 export FZF_DEFAULT_OPTS='--height=50% --info=inline --layout=reverse'
+
+# Prevent homebrew from gathering analytics.
+export HOMEBREW_NO_ANALYTICS=1

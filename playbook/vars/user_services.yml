@@ -1,0 +1,4 @@
+---
+required_user_services:
+  - services/org.emacs.service.plist
+  - services/org.notebook.service.plist
